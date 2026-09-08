@@ -89,8 +89,11 @@ button:focus-visible,
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(28, 25, 23, 0.92);
-  backdrop-filter: blur(6px);
+  /* Solid, not translucent+blurred: backdrop-filter makes this element a
+     containing block for position:fixed descendants (the mobile nav-links
+     overlay lives inside .site-header), which breaks its viewport-fixed
+     full-screen sizing. Keep this background fully opaque. */
+  background: var(--ink);
   border-bottom: 1px solid var(--border);
   transition: padding 250ms ease;
 }
