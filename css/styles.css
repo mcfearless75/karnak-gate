@@ -224,6 +224,9 @@ button:focus-visible,
   border-bottom: 1px solid var(--border);
   padding: var(--space-4) 0;
 }
+@media (max-width: 640px) {
+  .stat-strip { grid-template-columns: repeat(2, 1fr); gap: var(--space-4) var(--space-2); }
+}
 .stat { text-align: center; }
 .stat-value {
   font-family: var(--font-head);
