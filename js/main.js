@@ -15,16 +15,21 @@ document.addEventListener('DOMContentLoaded', () => {
   // Mobile nav toggle
   const navToggle = document.querySelector('.nav-toggle');
   const navLinks = document.querySelector('.nav-links');
+  const hamburgerIcon = '<path d="M2 5h16M2 10h16M2 15h16" stroke="currentColor" stroke-width="2"/>';
+  const closeIcon = '<path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="2"/>';
+  const setNavOpen = (isOpen) => {
+    navLinks.classList.toggle('is-open', isOpen);
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+    document.body.classList.toggle('nav-open', isOpen);
+    const svg = navToggle.querySelector('svg');
+    if (svg) svg.innerHTML = isOpen ? closeIcon : hamburgerIcon;
+  };
   if (navToggle && navLinks) {
     navToggle.addEventListener('click', () => {
-      const isOpen = navLinks.classList.toggle('is-open');
-      navToggle.setAttribute('aria-expanded', String(isOpen));
+      setNavOpen(!navLinks.classList.contains('is-open'));
     });
     navLinks.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('is-open');
-        navToggle.setAttribute('aria-expanded', 'false');
-      });
+      link.addEventListener('click', () => setNavOpen(false));
     });
   }
 
